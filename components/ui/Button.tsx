@@ -8,9 +8,11 @@ type ButtonProps = {
 
 const Button = ({ label, variant, icon: Icon }: ButtonProps) => {
   return (
-    <button className={`px-6 py-4 title-16 ${variant}`}>
+    <button
+      className={`px-6 py-4 title-16 ${variant} flex justify-center items-center`}
+    >
       {label}
-      {Icon && <Icon />}
+      {Icon && <Icon size={24} className="ml-2" />}
     </button>
   );
 };
