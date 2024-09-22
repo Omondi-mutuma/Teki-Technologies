@@ -23,7 +23,7 @@ body {
   @apply bg-yellow-100 border-2 border-transparent rounded-full text-black transition duration-200 hover:text-white hover:border-2 hover:border-yellow-100 hover:bg-transparent;
 }
 .outlined {
-  @apply border-2 border-transparent rounded-full text-yellow-100 transition duration-200 hover:text-white hover:border-2 hover:border-yellow-100;
+  @apply border-2 border-yellow-100 rounded-full text-yellow-100 transition duration-200 hover:text-white hover:border-2 hover:border-white;
 }
 
 @layer utilities {

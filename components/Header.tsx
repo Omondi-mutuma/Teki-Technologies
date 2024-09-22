@@ -1,47 +1,67 @@
-import React from "react";
-import Image from "next/image";
-import { GiHamburgerMenu } from "react-icons/gi";
+"use client"; // Ensure this is the first line
+
 import { NAV_LINKS } from "@/constants";
+import React from "react";
+import HoverBorderGradient from "@/components/ui/hover-border-gradient";
+import Image from "next/image";
 import Link from "next/link";
-import Button from "./ui/Button";
+import { motion } from "framer-motion";
+
+const headerVariants = {
+  hidden: { y: -100, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 const Header = () => {
   return (
-    <header className="flex px-4 py-4 items-center justify-between w-full">
-      {/* Logo */}
-      <Image src={"/svg/mobile-logo.svg"} alt="Logo" width={32} height={32} />
-
-      <div className="hidden lg:flex items-center justify-center gap-28">
-        {/* Navigation */}
-        <nav className="flex items-center justify-center">
-          <ul className="flex gap-6">
-            {NAV_LINKS.map((link, index) => (
-              <li
-                key={index}
-                className="relative hover:text-yellow-100 cursor-pointer group"
-              >
-                <Link href={link.path} className="title-16">
+    <motion.header
+      className="z-40 fixed top-0 left-0 w-full flex justify-center items-center py-4 bg-white dark:bg-transparent"
+      variants={headerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <nav className="w-full px-4 sm:px-16">
+        <ul className="flex justify-center items-center gap-8 w-full">
+          {NAV_LINKS.map((link) => (
+            <li
+              key={link.path}
+              className={`p-4 ${!link.logo ? "hidden sm:block" : ""}`}
+            >
+              {link.logo ? (
+                <HoverBorderGradient
+                  containerClassName="rounded-full"
+                  as="button"
+                  aria-label={`Navigate to ${link.label}`}
+                  className="dark:bg-background bg-white text-black dark:text-white flex items-center space-x-2"
+                >
+                  <Image
+                    src="/svg/mobile-logo.svg" // Ensure this path is correct
+                    alt="Company Logo"
+                    width={24}
+                    height={24}
+                  />
+                  <span className=" sm:inline">{link.label}</span>
+                </HoverBorderGradient>
+              ) : (
+                <Link
+                  href={link.path}
+                  className="text-white hover:text-yellow-500 dark:text-gray-100 transition-colors"
+                >
                   {link.label}
                 </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* CTA Buttons */}
-        <div className="flex items-center gap-4 ml-6">
-          <Button label="Login" variant="" />
-
-          <Button label="Get started" variant="filled" />
-        </div>
-      </div>
-
-      {/* Hamburger Menu */}
-      <GiHamburgerMenu
-        size={24}
-        className="lg:hidden hover:text-yellow-100 cursor-pointer transition-colors"
-      />
-    </header>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </motion.header>
   );
 };
 

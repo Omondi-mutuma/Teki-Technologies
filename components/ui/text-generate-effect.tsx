@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
@@ -38,7 +37,9 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className="dark:text-white text-black opacity-0"
+              className={`${
+                idx < 1 ? "dark:text-white" : "dark:text-white"
+              } text-black opacity-0`}
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}
@@ -52,9 +53,11 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div className={cn("font-bold ", className)}>
-      <div className="leading-[120%]">
-        <div className="">{renderWords()}</div>
+    <div className={cn("font-bold", className)}>
+      <div className="my-4">
+        <div className=" dark:text-white text-black leading-snug tracking-wide">
+          {renderWords()}
+        </div>
       </div>
     </div>
   );

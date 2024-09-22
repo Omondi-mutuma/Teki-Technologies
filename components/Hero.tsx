@@ -1,56 +1,60 @@
 import React from "react";
-import Button from "./ui/Button";
-import { BiChevronRight } from "react-icons/bi";
-import { Compare } from "./ui/compare";
+import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
-
-// Text to be animated in the heading
-const headline = "Next-level Websites for Forward-Thinking Brands";
-const tagline =
-  "At Teki Technologies, we partner with visionary brands to craft websites that are not just ahead of the curve—they set the curve.";
+import Button from "./ui/Button";
+import { FaChevronRight, FaLocationArrow } from "react-icons/fa";
 
 const Hero = () => {
   return (
-    <section className="relative flex flex-col items-center gap-8 justify-center py-32 w-full bg-white dark:bg-background dark:bg-dot-white-200/[0.2] bg-dot-black/[0.2]">
-      {/* Radial gradient overlay */}
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-background bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-
-      {/* Content Container */}
-      <div className="flex flex-col gap-8 text-center max-w-2xl z-10">
-        {/* Animated Heading */}
-        <TextGenerateEffect
-          words={headline}
-          className="text-3xl lg:text-5xl font-bold"
+    <section className="flex flex-col justify-center items-center">
+      {/* Spotlight at the top of the homepage */}
+      <div className="h-full w-full rounded-md flex md:items-center md:justify-center bg-background/[0.96] antialiased bg-grid-white/[0.02] overflow-hidden absolute">
+        <Spotlight
+          className="-top-40 left-0 md:left-60 md:-top-20"
+          fill="white"
         />
-
-        {/* Subheading Paragraph */}
-        <TextGenerateEffect
-          words={tagline}
-          className="body-16 lg:body-16 lg:text-green-600"
-          filter={false}
-        />
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button label="Get Started" variant="filled" />
-          <Button
-            label="Talk to our A.I"
-            icon={BiChevronRight}
-            variant="outlined"
-          />
-        </div>
       </div>
 
-      {/* Compare Component Container */}
-      <div className="w-full mt-24 p-4 border rounded-3xl bg-neutral-100 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700">
-        <Compare
-          firstImage="https://assets.aceternity.com/code-problem.png"
-          secondImage="https://assets.aceternity.com/code-solution.png"
-          firstImageClassName="object-cover object-left-top w-full h-full"
-          secondImageClassname="object-cover object-left-top w-full h-full" // Fixed typo: ClassName with capital 'N'
-          className="h-96 w-full md:h-128" // Responsive height
-          slideMode="hover"
+      {/* Grid Background container */}
+      <div className="h-screen w-full dark:bg-background bg-white  dark:bg-grid-small-yellow-600/[0.2] bg-grid-small-black/[0.2] absolute top-0 left-0 flex items-center justify-center">
+        {/* Radial gradient for the container to give a faded look */}
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-background bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      </div>
+
+      {/* Moving border element --- Tip:use as a header container for logo */}
+      {/* <HoverBorderGradient
+        containerClassName="rounded-full mt-36"
+        as="button"
+        className="dark:bg-background bg-white text-black dark:text-white flex items-center space-x-2"
+      >
+        <Image
+          src={"/svg/mobile-logo.svg"}
+          alt="company logo"
+          width={24}
+          height={24}
         />
+        <span>Teki Technologies</span>
+      </HoverBorderGradient> */}
+
+      {/* Headline text and subheading paragraph with text-generate animation*/}
+      <div className="max-w-5xl md:3xl  mx-auto relative z-10  w-full mt-36">
+        <TextGenerateEffect
+          className="text-[40px] md:text-5xl lg:text-6xl font-bold text-center bg-clip-text "
+          words="Next-Level Websites For Forward-Thinking Brands"
+        />
+        <TextGenerateEffect
+          className="px-6 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto"
+          words="At Teki Technologies, we partner with visionary brands to craft websites that are not just ahead of the curve—they set the curve."
+        />
+        {/* Call to action Buttons with color invert animation*/}
+        <div className="py-8 relative flex justify-center gap-8 items-center">
+          <Button
+            label="Request a Quote"
+            variant="filled"
+            icon={FaLocationArrow}
+          />
+          <Button label="Learn More" variant="outlined" icon={FaChevronRight} />
+        </div>
       </div>
     </section>
   );
